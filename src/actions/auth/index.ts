@@ -1,6 +1,4 @@
-export const SIGN_IN = 'SIGN_IN';
-export const SIGN_OUT = 'SIGN_OUT';
-
+import { SIGN_IN, SIGN_OUT } from "../../@types/auth"
 
 
 export const signIn = () => {

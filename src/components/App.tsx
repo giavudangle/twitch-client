@@ -6,10 +6,7 @@ import { StreamCreate, StreamDelete, StreamEdit, StreamList, StreamShow } from '
 import { Header } from './common'
 import { useSelector } from 'react-redux'
 
-const App: React.FC = () => {
-
-    console.log(useSelector(state => state));
-    
+const App: React.FC = () => {    
 
     return (
         <div>
