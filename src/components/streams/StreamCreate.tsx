@@ -1,11 +1,99 @@
-import React from 'react';
+import React from "react";
 
-export const StreamCreate = () => {
-    return (
-        <div>
-            Create
-        </div>
-    )
+import {
+  Field,
+  FormErrors,
+  InjectedFormProps,
+  reduxForm,
+  WrappedFieldMetaProps,
+  WrappedFieldProps,
+} from "redux-form";
+
+type TCustomFieldProps = {
+  label: String;
+  // Add more custom types
+};
+
+interface ICreateStreamForm {
+  title: String;
+  description: String;
 }
 
- 
+const _renderError: React.FC<WrappedFieldMetaProps> = ({
+  error,
+  touched,
+}: WrappedFieldMetaProps) => {
+  if (touched && error) {
+    return (
+      <div className="ui error message">
+        <div className="header">{error}</div>
+      </div>
+    );
+  }
+  return <></>;
+};
+
+const _renderField: React.FC<WrappedFieldProps & TCustomFieldProps> = ({
+  input,
+  label,
+  meta,
+}) => {
+  const className = `field ${meta.error && meta.touched ? 'error' : ''}`
+  return (
+    <div className={className}>
+      <label>{label}</label>
+      <input {...input} />
+      {_renderError(meta)}
+    </div>
+  );
+};
+
+const _onSubmit = (form: ICreateStreamForm) => {
+  console.log(form);
+};
+
+const _validate = (form: ICreateStreamForm): FormErrors<ICreateStreamForm> => {
+  const errors: FormErrors<ICreateStreamForm> = {};
+  if (!form) {
+    errors._error = "FORM ERRORS";
+    return errors;
+  }
+  if (!form.title) {
+    errors.title = "You must enter a title";
+  }
+  if (!form.description) {
+    errors.description = "You must enter a description";
+  }
+  return errors;
+};
+
+export const StreamCreateForm: React.FC<InjectedFormProps<ICreateStreamForm>> =
+  ({ handleSubmit }) => {
+    return (
+      <form onSubmit={handleSubmit(_onSubmit)} className="ui form error">
+        <div className="fields">
+          <Field
+            label="Enter title "
+            autoComplete="undefined"
+            name="title"
+            component={_renderField}
+          />
+          <Field
+            autoComplete="undefined"
+            label="Enter description "
+            name="description"
+            component={_renderField}
+          />
+        </div>
+        <button className="ui right labeled icon button primary">
+          <i className="right arrow icon"></i>
+          Submit
+        </button>
+      </form>
+    );
+  };
+
+export const StreamCreate = reduxForm<ICreateStreamForm>({
+  form: "create",
+  validate: _validate,
+})(StreamCreateForm);

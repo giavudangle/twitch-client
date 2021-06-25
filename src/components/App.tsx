@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Link } from 'react-router-dom'
 import { StreamCreate, StreamDelete, StreamEdit, StreamList, StreamShow } from './streams'
 
 import { Header } from './common'
-import { useSelector } from 'react-redux'
 
 const App: React.FC = () => {    
 
