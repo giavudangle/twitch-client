@@ -1,17 +1,11 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { signIn, signOut } from '../actions/auth';
 
 import { OAUTH2_CLIENT_ID } from '../config/oauth2'
 import { useAppDispatch, useAppSelector } from '../hooks/useHooks';
 
-declare global {
-    interface Window {
-        gapi: gapi.auth2.ClientConfig | gapi.auth2.AuthResponse;
-        auth: gapi.auth2.GoogleAuth;
-    }
-}
+
 
 const _this = window;
 
