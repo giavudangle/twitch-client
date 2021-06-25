@@ -1,21 +1,20 @@
 import { AnyAction } from "redux"
 import { SIGN_IN, SIGN_OUT } from "../../@types/auth"
+import { IUser } from "../../interfaces/IUser"
 
 
-interface IAuth {
-    isSignedIn : boolean | null
-} 
 
-const INITIAL_STATE : IAuth  ={
-    isSignedIn : null
+const INITIAL_STATE : IUser  ={
+    isSignedIn : false,
+    userId:''
 }
 
-export default (state = INITIAL_STATE, action : AnyAction) => {
+export default (state = INITIAL_STATE, action : AnyAction) : IUser => {
     switch(action.type){
         case SIGN_IN:
-            return {...state,isSignedIn : true}
+            return {...state,isSignedIn : true,userId:action.payload}
         case SIGN_OUT:
-            return {...state,isSignedIn : false}
+            return {...state,isSignedIn : false,userId:''}
         default :
             return state
     }

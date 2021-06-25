@@ -1,9 +1,11 @@
 import { SIGN_IN, SIGN_OUT } from "../../@types/auth"
+import { IActionCreator } from "../../interfaces/IActionCreator"
 
 
-export const signIn = () => {
+export const signIn = (userId : String ) : IActionCreator => {
     return {
-        type:SIGN_IN
+        type:SIGN_IN,
+        payload:userId
     }
 }
 
