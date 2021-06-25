@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { signIn, signOut } from '../actions/auth';
 
 import { OAUTH2_CLIENT_ID } from '../config/oauth2'
+import { useAppDispatch, useAppSelector } from '../hooks/useHooks';
 
 declare global {
     interface Window {
@@ -16,37 +17,36 @@ const _this = window;
 
 
 const GoogleAuth: React.FC = () => {
-    const [isSignedIn, setIsSignedIn] = useState<Boolean>(false);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
+    const { isSignedIn } = useAppSelector(state => state.auth);
+
+    
 
     useEffect(() => {
-        window.gapi.load('client:auth2', () => {
-            window.gapi.client.init({
+        _this.gapi.load('client:auth2', () => {
+            _this.gapi.client.init({
                 clientId: OAUTH2_CLIENT_ID,
                 scope: 'email'
             }).then(() => {
-                _this.auth = window.gapi.auth2.getAuthInstance();
-                setIsSignedIn(window.auth.isSignedIn.get());
+                _this.auth = _this.gapi.auth2.getAuthInstance();
                 _this.auth.isSignedIn.listen(_onAuthChange)
+                _onAuthChange(_this.auth.isSignedIn.get());
             })
         })
     }, [])
 
-    const _onAuthChange = (status : boolean) =>   {
-        return status ? dispatch(signOut()) : dispatch(signIn())
-    }
-
-    const _onSignIn = () => {
-        _this.auth.signIn();
-    }
-
-    const _onSignOut = () => {
-        _this.auth.signOut();
-
-    }
+    const _onAuthChange = (status: boolean) => 
+        status 
+        ? dispatch(signIn(_this.auth.currentUser.get().getId())) 
+        : dispatch(signOut())
+    const _onSignIn = () => _this.auth.signIn();
+    const _onSignOut = () => _this.auth.signOut();
 
     const _renderAuth = () => {
-        if (isSignedIn) {
+        if (isSignedIn === null) {
+            return null
+        }
+        else if (isSignedIn) {
             return (
                 <button onClick={_onSignOut} className='ui red google button'>
                     <i className='google icon' />
