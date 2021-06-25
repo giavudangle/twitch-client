@@ -19,7 +19,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["jest","lodash", "gapi", "gapi.auth2"]
+    "types": [
+      "jest",
+      "lodash",
+      "gapi",
+      "gapi.auth2"
+    ]
   },
   "include": [
     "src"
