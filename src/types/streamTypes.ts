@@ -1,5 +1,5 @@
-import { IStreamForm } from "../interfaces/IStreamForm";
+import { IStream } from "../interfaces/IStream";
 
 export type TListStream ={
-    streams :  Array<IStreamForm>
+    streams :  [IStream]
 }
