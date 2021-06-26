@@ -1,6 +1,5 @@
-import { SIGN_IN, SIGN_OUT } from "../../@types/auth"
+import { SIGN_IN, SIGN_OUT } from "../../constants/authTypes"
 import { IActionCreator } from "../../interfaces/IActionCreator"
-
 
 export const signIn = (userId : String ) : IActionCreator => {
     return {
@@ -14,3 +13,4 @@ export const signOut = () => {
         type:SIGN_OUT
     }
 }
+

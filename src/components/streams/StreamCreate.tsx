@@ -8,16 +8,16 @@ import {
   WrappedFieldMetaProps,
   WrappedFieldProps,
 } from "redux-form";
+import { createStream } from "../../actions/stream";
+import { useThunkDispatch } from "../../hooks/useHooks";
+import { ICreateStreamForm } from "../../interfaces/ICreateStreamForm";
 
 type TCustomFieldProps = {
   label: String;
   // Add more custom types
 };
 
-interface ICreateStreamForm {
-  title: String;
-  description: String;
-}
+
 
 const _renderError: React.FC<WrappedFieldMetaProps> = ({
   error,
@@ -48,9 +48,7 @@ const _renderField: React.FC<WrappedFieldProps & TCustomFieldProps> = ({
   );
 };
 
-const _onSubmit = (form: ICreateStreamForm) => {
-  console.log(form);
-};
+
 
 const _validate = (form: ICreateStreamForm): FormErrors<ICreateStreamForm> => {
   const errors: FormErrors<ICreateStreamForm> = {};
@@ -69,6 +67,13 @@ const _validate = (form: ICreateStreamForm): FormErrors<ICreateStreamForm> => {
 
 export const StreamCreateForm: React.FC<InjectedFormProps<ICreateStreamForm>> =
   ({ handleSubmit }) => {
+    const dispatch = useThunkDispatch();
+
+    const _onSubmit = (form: ICreateStreamForm) => dispatch(createStream(form))
+      
+    
+
+
     return (
       <form onSubmit={handleSubmit(_onSubmit)} className="ui form error">
         <div className="fields">

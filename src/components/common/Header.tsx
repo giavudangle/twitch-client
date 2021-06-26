@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import twitchLogo from '../../assets/images/twitch-logo.png';
-import GoogleAuth from '../GoogleAuth';
+import GoogleAuth from '../auth/GoogleAuth';
 
 export const Header = () => {
     return (

@@ -1,9 +1,9 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { signIn, signOut } from '../actions/auth';
+import { signIn, signOut } from '../../actions/auth';
 
-import { OAUTH2_CLIENT_ID } from '../config/oauth2'
-import { useAppDispatch, useAppSelector } from '../hooks/useHooks';
+import { OAUTH2_CLIENT_ID } from '../../config/oauth2'
+import { useAppDispatch, useAppSelector } from '../../hooks/useHooks';
 
 
 
