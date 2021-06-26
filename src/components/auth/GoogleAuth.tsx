@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { signIn, signOut } from '../../actions/auth';
 
 import { OAUTH2_CLIENT_ID } from '../../config/oauth2'
-import { useAppDispatch, useAppSelector } from '../../hooks/useHooks';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 
 

@@ -9,11 +9,12 @@ import {
   WrappedFieldProps,
 } from "redux-form";
 import { createStream } from "../../actions/stream";
-import { useThunkDispatch } from "../../hooks/useHooks";
-import { ICreateStreamForm } from "../../interfaces/ICreateStreamForm";
+import { useThunkDispatch } from "../../hooks/useThunkDispatch";
+import { ICreateStreamForm } from "../../interfaces/IStream";
 
 type TCustomFieldProps = {
   label: String;
+  
   // Add more custom types
 };
 
