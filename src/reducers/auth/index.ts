@@ -1,5 +1,5 @@
 import { AnyAction } from "redux"
-import { SIGN_IN, SIGN_OUT } from "../../@types/auth"
+import { SIGN_IN, SIGN_OUT } from "../../constants/authTypes"
 import { IUser } from "../../interfaces/IUser"
 
 
