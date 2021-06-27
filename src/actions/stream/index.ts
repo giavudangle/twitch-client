@@ -2,26 +2,26 @@ import { AxiosResponse } from 'axios'
 import { CREATE_STREAM, DELETE_STREAM, EDIT_STREAM, FETCH_STREAM, FETCH_STREAMS } from '../../constants/streamTypes'
 import { streamApi } from '../../api'
 import { ICreateStreamForm, IEditStreamForm } from '../../interfaces/IStream'
-import { ThunkDispatchType } from '../../store'
+import {RootStateType, ThunkDispatchType } from '../../store'
 import { TListStream } from '../../types/streamTypes'
 import { IStreamForm } from '../../interfaces/IStream'
 
 export const createStream =
     (formValues: ICreateStreamForm) =>
-        async (dispatch: ThunkDispatchType) => {
-            const response: AxiosResponse = await streamApi.post<ICreateStreamForm>(`/streams`, formValues);
+        async (dispatch: ThunkDispatchType,getState : () => RootStateType) => {
+            const {auth:{userId}} = getState();
+            
+            const response: AxiosResponse = await 
+                streamApi.post<ICreateStreamForm>(`/streams`, {...formValues,userId});
+              
             dispatch({
                 type:CREATE_STREAM,
                 payload:response.data as ICreateStreamForm
             })
         }
 
-
-
 export const fetchStreams = () => async (dispatch : ThunkDispatchType) => {
-    const response : AxiosResponse = await streamApi.get<TListStream>(`/streams`);
-    console.log(response);
-    
+    const response : AxiosResponse = await streamApi.get<TListStream>(`/streams`);    
     dispatch({
         type:FETCH_STREAMS,
         payload:response.data
@@ -37,9 +37,12 @@ export const fetchStream = (id : Number) => async (dispatch : ThunkDispatchType)
 }
 
 export const editStream = (id : Number,formValues : IEditStreamForm) => async (dispatch : ThunkDispatchType) => {
+    const {title,description} = formValues;
     const response : AxiosResponse = await streamApi.put<IStreamForm>(`/streams/${id}`,{
-        formValues
+        title,
+        description
     });
+    
     dispatch({
         type:EDIT_STREAM,
         payload: response.data

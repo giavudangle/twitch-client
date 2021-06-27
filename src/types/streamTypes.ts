@@ -1,5 +1,5 @@
 import { IStream } from "../interfaces/IStream";
 
 export type TListStream ={
-    streams :  [IStream]
+    streams :  IStream[]
 }

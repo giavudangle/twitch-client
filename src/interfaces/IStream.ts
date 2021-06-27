@@ -2,15 +2,17 @@ export interface IStream {
     title: String;
     description: String;
     id: Number ;
+    userId : Number | String;
 
 }
 
 export interface ICreateStreamForm extends IStream {
-
+    userId : Number | String
 }
 
-export interface IEditStreamForm extends IStream {
-
+export interface IEditStreamForm  {
+    title: String;
+    description: String;
 }
 
 

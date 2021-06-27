@@ -1,5 +1,5 @@
 
-export interface IActionCreator {
+export interface IActionCreator{
     type: String,
-    payload : String | Array<any> | Object | Number,
+    payload? : any | null
 }

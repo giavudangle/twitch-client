@@ -14,9 +14,7 @@ export const Header = () => {
                 <Link to='/' className='item'>
                     All Streams
                 </Link>
-                <Link to='/streams/new' className='item'>
-                    Create Streams
-                </Link>
+             
                 <GoogleAuth/>
             </div>
         </div>
