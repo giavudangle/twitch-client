@@ -5,6 +5,7 @@ import { ICreateStreamForm, IEditStreamForm } from '../../interfaces/IStream'
 import {RootStateType, ThunkDispatchType } from '../../store'
 import { TListStream } from '../../types/streamTypes'
 import { IStreamForm } from '../../interfaces/IStream'
+import history from '../../utils/history'
 
 export const createStream =
     (formValues: ICreateStreamForm) =>
@@ -18,6 +19,7 @@ export const createStream =
                 type:CREATE_STREAM,
                 payload:response.data as ICreateStreamForm
             })
+            history.push('/')
         }
 
 export const fetchStreams = () => async (dispatch : ThunkDispatchType) => {
@@ -28,8 +30,8 @@ export const fetchStreams = () => async (dispatch : ThunkDispatchType) => {
     })
 }
 
-export const fetchStream = (id : Number) => async (dispatch : ThunkDispatchType) => {
-    const response : AxiosResponse = await streamApi.get<IStreamForm>(`/streams/${id}`);
+export const fetchStream = (id : Number ) => async (dispatch : ThunkDispatchType) => {
+    const response : AxiosResponse = await streamApi.get<IStreamForm>(`/streams/${id}`);    
     dispatch({
         type:FETCH_STREAM,
         payload:response.data
@@ -37,16 +39,15 @@ export const fetchStream = (id : Number) => async (dispatch : ThunkDispatchType)
 }
 
 export const editStream = (id : Number,formValues : IEditStreamForm) => async (dispatch : ThunkDispatchType) => {
-    const {title,description} = formValues;
-    const response : AxiosResponse = await streamApi.put<IStreamForm>(`/streams/${id}`,{
-        title,
-        description
+    const response : AxiosResponse = await streamApi.patch<IStreamForm>(`/streams/${id}`,{
+        ...formValues
     });
     
     dispatch({
         type:EDIT_STREAM,
         payload: response.data
     })
+    history.push('/')
 }
 
 export const deleteStream = (id : Number) => async (dispatch : ThunkDispatchType) => {
