@@ -1,28 +1,36 @@
-import React from 'react'
-import { Router, Route, Link } from 'react-router-dom'
+import React from "react";
+import { Router, Route, Link, Switch } from "react-router-dom";
 
-import { StreamCreate, StreamDelete, StreamEdit, StreamList, StreamShow } from './streams'
+import {
+  StreamCreate,
+  StreamDelete,
+  StreamEdit,
+  StreamList,
+  StreamShow,
+} from "./streams";
 
-import { Header } from './common'
+import { Header } from "./common";
 
-import history from '../utils/history'
+import history from "../utils/history";
 
-const App: React.FC = () => {    
-
-    return (
+const App: React.FC = () => {
+  return (
+    <div className="ui container">
+      <Router history={history}>
         <div>
-            <Router history={history}>
-                <Header />
-                <div>
-                    <Route path='/' exact component={StreamList} />
-                    <Route path='/streams/new' exact component={StreamCreate} />
-                    <Route path='/streams/edit/:id' exact component={StreamEdit} />
-                    <Route path='/streams/delete/:id' exact component={StreamDelete} />
-                    <Route path='/streams/show' exact component={StreamShow} />
-                </div>
-            </Router>
+          <Header />
+          <Switch>
+            <Route path="/" exact component={StreamList} />
+            <Route path="/streams/new" exact component={StreamCreate} />
+            <Route path="/streams/edit/:id" exact component={StreamEdit} />
+            <Route path="/streams/delete/:id" exact component={StreamDelete} />
+            <Route path="/streams/:id" exact component={StreamShow} />
+          </Switch>
+        
         </div>
-    )
-}
+      </Router>
+    </div>
+  );
+};
 
-export default App
+export default App;
