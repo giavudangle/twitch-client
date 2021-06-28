@@ -44,7 +44,7 @@ export const StreamList : React.FC = () => {
     }
 
     const _renderList  = () => {
-        return streams.map(stream => {
+        return streams!.map(stream => {
             return (
                 <div className='item' key={stream!.id.toString()}>
                     {_renderAdmin(stream)}
