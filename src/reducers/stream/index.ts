@@ -1,9 +1,7 @@
 import { AnyAction } from "redux"
-import { SIGN_IN, SIGN_OUT } from "../../constants/authTypes"
 import { CREATE_STREAM, DELETE_STREAM, EDIT_STREAM, FETCH_STREAM, FETCH_STREAMS } from "../../constants/streamTypes"
-import { ICreateStreamForm, IStream, IStreamForm } from "../../interfaces/IStream"
-import { TListStream } from "../../types/streamTypes"
-import _, { LoDashExplicitArrayWrapper, LoDashExplicitObjectWrapper, LoDashImplicitWrapper, LoDashStatic, LoDashWrapper } from "lodash"
+import { IStream } from "../../interfaces/IStream"
+import _, {  } from "lodash"
 
 interface IReducerStream {
     streams:IStream[],
@@ -29,8 +27,8 @@ export default (state = INITIAL_STATE, action: AnyAction) : IReducerStream => {
             return {...state,streams: [...state.streams,action.payload] as IStream[]}
         case EDIT_STREAM:
             return {...state,streams : state.streams.map(item => item.id === action.payload.id ? action.payload : item) }   // Key interpolation
-        case DELETE_STREAM:
-            return {...state,streams: [...state.streams,_.omit(state.streams,action.payload)] as IStream[]}
+        case DELETE_STREAM:           
+            return {...state,streams : state.streams.filter(item => item.id !== action.payload) as IStream[]}
         default:
             return state
     }

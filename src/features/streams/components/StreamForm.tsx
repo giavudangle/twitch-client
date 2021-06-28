@@ -48,7 +48,7 @@ const StreamCreateForm: React.FC<IOwnProps & InjectedFormProps<{},IOwnProps>> =
             component={Form}
           />
         </div>
-        <button className="ui right labeled icon button primary">
+        <button style={{marginTop:10}} className="ui right labeled icon button primary">
           <i className="right arrow icon"></i>
           Submit
         </button>

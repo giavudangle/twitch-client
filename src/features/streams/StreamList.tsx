@@ -25,7 +25,7 @@ export const StreamList : React.FC = () => {
                     </Link>             
                     <Link className="ui button negative" to={`/streams/delete/${stream.id}`}>
                     Delete
-                    </Link>         
+                    </Link>          
                 </div>
             )
         }

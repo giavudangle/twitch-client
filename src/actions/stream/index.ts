@@ -56,5 +56,6 @@ export const deleteStream = (id : Number) => async (dispatch : ThunkDispatchType
         type:DELETE_STREAM,
         payload : id
     })
+    history.push('/')
 }
 
